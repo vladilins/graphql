@@ -1,23 +1,26 @@
-import React, { Component } from 'react';
-import gql from 'graphql-tag';
-import { graphql } from 'react-apollo';
+import React, { Component } from "react";
+import gql from "graphql-tag";
+import { graphql } from "react-apollo";
 
 class LyricCreate extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { content: '' };
+    this.state = { content: "" };
   }
 
   onSubmit(event) {
     event.preventDefault();
 
-    this.props.mutate({
-      variables: {
-        content: this.state.content,
-        songId: this.props.songId
-      }
-    }).then(() => this.setState({ content: '' }));
+    this.props
+      .mutate({
+        variables: {
+          content: this.state.content,
+          // prop from SongDetails
+          songId: this.props.songId
+        }
+      })
+      .then(() => this.setState({ content: "" }));
   }
 
   render() {

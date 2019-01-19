@@ -1,16 +1,17 @@
-import React, { Component } from 'react';
-import { graphql } from 'react-apollo';
-import gql from 'graphql-tag';
+import React, { Component } from "react";
+import { graphql } from "react-apollo";
+import gql from "graphql-tag";
 
 class LyricList extends Component {
   onLike(id, likes) {
     this.props.mutate({
       variables: { id },
+      // optimistinc update for fast ui update from appolo
       optimisticResponse: {
-        __typename: 'Mutation',
+        __typename: "Mutation",
         likeLyric: {
           id,
-          __typename: 'LyricType',
+          __typename: "LyricType",
           likes: likes + 1
         }
       }
@@ -37,11 +38,7 @@ class LyricList extends Component {
   }
 
   render() {
-    return (
-      <ul className="collection">
-        {this.renderLyrics()}
-      </ul>
-    );
+    return <ul className="collection">{this.renderLyrics()}</ul>;
   }
 }
 
